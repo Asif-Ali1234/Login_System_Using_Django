@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Login</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: columns;
+            min-height: 100vh;
+            background: rgba(0,0,0,0.2);
+        }
+        .container{
+            width: 300px;
+            height: 300px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 10px 16px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: white;
+        }
+        form{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+        }
+        .form-group{
+            width: 100%;
+            text-align:center;
+        }
+        input{
+            width: 95%;
+            height:35px;
+            font-size: 1.1em;
+            border: 1px solid white;
+            color:rgba(0,0,0,0.8);
+            outline: none;
+            border-radius: 5px;
+            padding:5px;
+            letter-spacing: 1px;
+            box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.25),
+                inset -2px -2px 8px 0 rgba(255, 255, 255, 0.3),
+                -2px -2px 8px 0 rgba(255, 255, 255, 0.3),
+                inset 2px 2px 8px 0 rgba(0,0,0,0.25);
+            
+        }
+
+        input::placeholder{
+            color: rgba(0,0,0,0.4);
+        }
+        .form-group a{
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            font-size: 1em;
+            color: rgba(0,0,0,0.5); 
+        }
+
+        .form-group a:hover{
+            color: black;
+        }
+        #alertmessages{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #alertmessages h6{
+            word-wrap: break-word;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="login" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Enter your username or email">
+            </div>
+            <div class="form-group">
+                <input type="password" name="passwd" placeholder="Enter your Password">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-primary" >Login</button>
+            </div>
+            <div class="form-group">
+                <a href="register">Newbie ?? </a>
+            </div>
+        </form>
+        {% for msg in messages %}
+            <div class="alert alert-info alert-dismissible" id="alertmessages">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h6>{{msg}}</h6>
+              </div>
+            {% endfor %}
+    </div>
+</body>
+</html>
